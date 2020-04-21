@@ -1,10 +1,8 @@
 package com.example.ht4
 
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.registration_user.*
@@ -12,7 +10,7 @@ import kotlinx.android.synthetic.main.registration_user.*
 
 class RegistrationUserInfo : AppCompatActivity(), View.OnClickListener {
 
-   var src = R.drawable.ic_contact_phone_blue_30dp
+    private var src = R.drawable.ic_contact_phone_blue_30dp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,20 +24,20 @@ class RegistrationUserInfo : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
+        when (v?.id) {
             R.id.doneButton -> {
                 (Store.instance.add(Item(contactName.text.toString(), contactEmailOrPhone.text.toString(), src)))
-                 val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }
-            R.id.phoneNumberRadio ->{
+            R.id.phoneNumberRadio -> {
                 contactEmailOrPhone.hint = "Phone number"
-            src = R.drawable.ic_contact_phone_blue_30dp
+                src = R.drawable.ic_contact_phone_blue_30dp
             }
-            R.id.emailRadio ->{
+            R.id.emailRadio -> {
                 contactEmailOrPhone.hint = "Email"
                 src = R.drawable.ic_contact_mail__30dp
-                }
             }
         }
     }
+}

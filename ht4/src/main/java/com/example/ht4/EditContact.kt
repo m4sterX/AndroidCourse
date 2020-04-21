@@ -3,13 +3,11 @@ package com.example.ht4
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.edit_contact.*
-import kotlinx.android.synthetic.main.registration_user.*
 
-class EditContact : AppCompatActivity(), View.OnClickListener{
+class EditContact : AppCompatActivity(), View.OnClickListener {
     private var item: Item? = null
     var src = R.drawable.ic_contact_phone_blue_30dp
 

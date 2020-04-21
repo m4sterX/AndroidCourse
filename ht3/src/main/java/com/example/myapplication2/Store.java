@@ -30,6 +30,4 @@ public class Store {
     public Item get(int index) {
         return this.items.get(index);
     }
-    public void update(Item item) {
-    }
 }

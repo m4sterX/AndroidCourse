@@ -1,9 +1,7 @@
 package com.example.myapplication2;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
-
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,10 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public final class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private Context context;
 
-    public ItemAdapter(Context context) {
-    this.context = context;
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -27,18 +26,16 @@ public final class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int index) {
-        holder.itemView.setOnClickListener(
-                view -> {
-                    Intent intent = new Intent(context, EditContact.class);
-                    intent.putExtra("index", index);
-                    context.startActivity(intent);
-                }
-        );
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        holder.itemView.setOnClickListener((View.OnClickListener) v -> {
+            onItemClickListener.onClick(position);
+        });
+
+
         TextView name = holder.itemView.findViewById(R.id.contactNameReady);
         TextView emailOrNumber = holder.itemView.findViewById(R.id.contactEmailOrPhoneReady);
         ImageView imgv = holder.itemView.findViewById(R.id.imgButtonFromItem);
-        Item item = Store.getStore().get(index);
+        Item item = Store.getStore().get(position);
         name.setText(item.getName());
         emailOrNumber.setText(item.getEmail());
         imgv.setImageResource(item.getSetSRC());
@@ -47,5 +44,9 @@ public final class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public int getItemCount() {
         return Store.getStore().size();
+    }
+
+    public interface OnItemClickListener {
+        void onClick(int position);
     }
 }

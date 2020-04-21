@@ -10,26 +10,24 @@ import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-public class RegistrationUserInfo extends AppCompatActivity implements View.OnClickListener {
+public class RegistrationUserInfoActivity extends AppCompatActivity implements View.OnClickListener {
 
-    int src = R.drawable.ic_contact_phone_blue_30dp;
+    private int src = R.drawable.ic_contact_phone_blue_30dp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registration_user);
-        setSupportActionBar((Toolbar) findViewById(R.id.toolBarRegistration));
+        setSupportActionBar(findViewById(R.id.toolBarRegistration));
 
         final ImageButton done = findViewById(R.id.doneButton);
-
-        done.setOnClickListener(this);
         RadioButton radioName = findViewById(R.id.phoneNumberRadio);
         RadioButton radioEmail = findViewById(R.id.emailRadio);
+
+        done.setOnClickListener(this);
         radioName.setOnClickListener(this);
         radioEmail.setOnClickListener(this);
-
     }
 
     @Override
@@ -41,7 +39,7 @@ public class RegistrationUserInfo extends AppCompatActivity implements View.OnCl
                 Store.getStore().add(new Item(name.getText().toString(), emailOrPhone.getText().toString(), src));
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
-                break;
+                finish();
 
             case R.id.phoneNumberRadio:
                 EditText email = findViewById(R.id.contactEmailOrPhone);
@@ -54,9 +52,7 @@ public class RegistrationUserInfo extends AppCompatActivity implements View.OnCl
                 src = R.drawable.ic_contact_mail__30dp;
                 break;
         }
-
     }
-
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -66,6 +62,5 @@ public class RegistrationUserInfo extends AppCompatActivity implements View.OnCl
         }
         return super.onOptionsItemSelected(item);
     }
-
 }
 
