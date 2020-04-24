@@ -9,10 +9,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication2.dao.ContactDao;
+import com.example.myapplication2.data_base.MyDataBase;
+import com.example.myapplication2.entity.Contact;
+
+import java.util.List;
+
 public final class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     private OnItemClickListener onItemClickListener;
-
+    private RecyclerView.ViewHolder holder;
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
@@ -31,22 +36,34 @@ public final class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             onItemClickListener.onClick(position);
         });
 
+        MyDataBase db = SingletonDB.getInstance().getDatabase();
+        ContactDao contactDao = db.contactDao();
+        List<Contact> contacts = contactDao.getAll();
+        Contact contact = contacts.get(position);
 
         TextView name = holder.itemView.findViewById(R.id.contactNameReady);
         TextView emailOrNumber = holder.itemView.findViewById(R.id.contactEmailOrPhoneReady);
-        ImageView imgv = holder.itemView.findViewById(R.id.imgButtonFromItem);
-        Item item = Store.getStore().get(position);
-        name.setText(item.getName());
-        emailOrNumber.setText(item.getEmail());
-        imgv.setImageResource(item.getSetSRC());
+        ImageView imgV = holder.itemView.findViewById(R.id.imgButtonFromItem);
+
+        name.setText(contact.getName());
+        emailOrNumber.setText(contact.getEmailOrPhone());
+        imgV.setImageResource(contact.getSrc());
     }
 
     @Override
     public int getItemCount() {
-        return Store.getStore().size();
+        MyDataBase db = SingletonDB.getInstance().getDatabase();
+        ContactDao contactDao = db.contactDao();
+        return contactDao.getId().size();
     }
 
     public interface OnItemClickListener {
         void onClick(int position);
     }
+    public void deleteItem(Contact contact, ContactDao contactDao, int position, int contactsSize) {
+        contactDao.delete(contact);
+        notifyItemRemoved(position);
+        notifyItemRangeRemoved(position, contactsSize);
+    }
+
 }

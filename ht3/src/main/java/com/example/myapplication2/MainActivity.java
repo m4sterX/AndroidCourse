@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication2.dao.ContactDao;
+import com.example.myapplication2.data_base.MyDataBase;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
@@ -23,11 +25,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         ItemAdapter adapter = new ItemAdapter();
         adapter.setOnItemClickListener(position -> {
-            Intent intent = new Intent(MainActivity.this, EditContact.class);
-            startActivity(intent);
-        });
 
-        if (Store.getStore().size() > 0) {
+        });
+        MyDataBase db = SingletonDB.getInstance().getDatabase();
+        ContactDao contactDao = db.contactDao();
+        if (contactDao.getId().size() > 0) {
             TextView tv = findViewById(R.id.noContactsTV);
             tv.setText("");
         }

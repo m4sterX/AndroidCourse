@@ -1,12 +1,14 @@
 package com.example.myapplication2;
 
+import com.example.myapplication2.entity.Contact;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Store {
     private static final Store INST = new Store();
 
-    private final List<Item> items = new ArrayList<>();
+    private final List<Contact> contacts = new ArrayList<>();
 
     private Store() {
     }
@@ -15,19 +17,23 @@ public class Store {
         return INST;
     }
 
-    public void add(Item item) {
-        this.items.add(item);
+    public void add(Contact contact) {
+        this.contacts.add(contact);
     }
 
-    public List<Item> getAll() {
-        return this.items;
+    public List<Contact> getAll() {
+        return this.contacts;
     }
 
     public int size() {
-        return this.items.size();
+        return this.contacts.size();
     }
 
-    public Item get(int index) {
-        return this.items.get(index);
+    public Contact get(int index) {
+        return this.contacts.get(index);
+    }
+
+    public void delete(int index) {
+        this.contacts.remove(index);
     }
 }

@@ -2,14 +2,16 @@ package com.example.myapplication2;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication2.dao.ContactDao;
+import com.example.myapplication2.data_base.MyDataBase;
+import com.example.myapplication2.entity.Contact;
 
 public class RegistrationUserInfoActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -36,7 +38,11 @@ public class RegistrationUserInfoActivity extends AppCompatActivity implements V
             case R.id.doneButton:
                 EditText name = findViewById(R.id.contactName);
                 EditText emailOrPhone = findViewById(R.id.contactEmailOrPhone);
-                Store.getStore().add(new Item(name.getText().toString(), emailOrPhone.getText().toString(), src));
+
+                MyDataBase db = SingletonDB.getInstance().getDatabase();
+                ContactDao contactDao = db.contactDao();
+                Contact contact = new Contact(name.getText().toString(), emailOrPhone.getText().toString(),src);
+                contactDao.insert(contact);
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 finish();
@@ -54,13 +60,5 @@ public class RegistrationUserInfoActivity extends AppCompatActivity implements V
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }
 
