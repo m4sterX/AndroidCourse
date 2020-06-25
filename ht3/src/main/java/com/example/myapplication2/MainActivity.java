@@ -25,7 +25,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         ItemAdapter adapter = new ItemAdapter();
         adapter.setOnItemClickListener(position -> {
-
+            Intent intent = new Intent(this, EditContact.class);
+            intent.putExtra("position", position);
+            startActivity(intent);
         });
         MyDataBase db = SingletonDB.getInstance().getDatabase();
         ContactDao contactDao = db.contactDao();

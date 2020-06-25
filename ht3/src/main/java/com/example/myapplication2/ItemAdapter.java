@@ -17,7 +17,7 @@ import java.util.List;
 
 public final class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private OnItemClickListener onItemClickListener;
-    private RecyclerView.ViewHolder holder;
+
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
@@ -64,6 +64,7 @@ public final class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         contactDao.delete(contact);
         notifyItemRemoved(position);
         notifyItemRangeRemoved(position, contactsSize);
+
     }
 
 }
