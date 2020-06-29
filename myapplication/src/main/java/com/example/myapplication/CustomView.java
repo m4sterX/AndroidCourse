@@ -6,11 +6,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.view.View;
+import android.widget.Toast;
 
 
-
-public class CustomView extends View  {
-
+public class CustomView extends View implements View.OnClickListener {
+    @Override
+    public void onClick(View v) {
+        Toast.makeText(getContext(), "Mock", Toast.LENGTH_SHORT).show();
+    }
     public interface onMeasureListener {
         void onSizeChanged(int width, int height);
     }
@@ -46,6 +49,9 @@ public class CustomView extends View  {
         canvas.drawArc(oval, 270F, 90F, true, bluePaint);
     }
 
+    public void setListener(onMeasureListener listener) {
+        this.listener = listener;
+    }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
