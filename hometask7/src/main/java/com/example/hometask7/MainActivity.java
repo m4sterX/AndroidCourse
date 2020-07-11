@@ -11,11 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hometask7.DAO.ContactDao;
 import com.example.hometask7.data_base.MyDataBase;
+import com.example.hometask7.entity.Contact;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private List<Contact> contactsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Runnable runnable = () -> {
             MyDataBase db = SingletonDB.getInstance().getDatabase();
             ContactDao contactDao = db.contactDao();
+            contactsList = contactDao.getAll();
             if (contactDao.getId().size() > 0) {
                 TextView tv = findViewById(R.id.noContactsTV);
                 tv.setText("");
@@ -46,9 +52,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         RecyclerView recyclerView = findViewById(R.id.RecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
+        if (contactsList != null) {
+            adapter.setContactList(contactsList);
+            adapter.notifyDataSetChanged();
+        }
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
     }
 
     @Override

@@ -21,7 +21,6 @@ public class SingletonDB extends Application {
         super.onCreate();
         instance = this;
         database = Room.databaseBuilder(this, MyDataBase.class, "database")
-                .allowMainThreadQueries()
                 .build();
     }
 

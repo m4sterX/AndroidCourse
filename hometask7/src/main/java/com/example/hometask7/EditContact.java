@@ -42,6 +42,7 @@ public class EditContact extends AppCompatActivity implements View.OnClickListen
         rb1.setOnClickListener(this);
         rb2.setOnClickListener(this);
         Runnable runnable = () -> {
+
             MyDataBase db = SingletonDB.getInstance().getDatabase();
             ContactDao contactDao = db.contactDao();
             List<Contact> contacts = contactDao.getAll();
@@ -73,10 +74,14 @@ public class EditContact extends AppCompatActivity implements View.OnClickListen
                 contactP.setName(contNameEdit.getText().toString());
                 contactP.setEmailOrPhone(contEmailEdit.getText().toString());
                 contactP.setSrc(src);
-
-                contactDaoP.update(contactP);
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        contactDaoP.update(contactP);
+                    }
+                });
+                thread.start();
+                finish();
                 break;
 
             case R.id.phoneNumberRadioEdit:
@@ -93,8 +98,14 @@ public class EditContact extends AppCompatActivity implements View.OnClickListen
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
                 dialogBuilder.setPositiveButton("Yes", (dialog, which) -> {
                     ItemAdapter adapter = new ItemAdapter();
-                    adapter.deleteItem(contactP, contactDaoP, position, contactsSize);
-                    startActivity(new Intent(EditContact.this, MainActivity.class));
+                    Thread thread1 = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            adapter.deleteItem(contactP, contactDaoP, position, contactsSize);
+                        }
+                    });
+                    thread1.start();
+                   adapter.notifyDataSetChanged();
                     finish();
                 });
                 dialogBuilder.setNegativeButton("Cancel", (dialog, which) -> finish());

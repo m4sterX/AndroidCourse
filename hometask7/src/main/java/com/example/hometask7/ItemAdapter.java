@@ -13,16 +13,21 @@ import com.example.hometask7.DAO.ContactDao;
 import com.example.hometask7.data_base.MyDataBase;
 import com.example.hometask7.entity.Contact;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public final class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private OnItemClickListener onItemClickListener;
     private Handler handler;
-
+    private List<Contact> contactList = new ArrayList<>();
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
+    }
+
+    public void setContactList(List<Contact> contactList) {
+        this.contactList = contactList;
     }
 
     @NonNull
@@ -38,12 +43,7 @@ public final class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         holder.itemView.setOnClickListener(v -> onItemClickListener.onClick(position));
         handler = new Handler();
 
-        Runnable runnable = () -> {
-            MyDataBase db = SingletonDB.getInstance().getDatabase();
-            ContactDao contactDao = db.contactDao();
-            List<Contact> contacts = contactDao.getAll();
-            Contact contact = contacts.get(position);
-
+            Contact contact = contactList.get(position);
             TextView name = holder.itemView.findViewById(R.id.contactNameReady);
             TextView emailOrNumber = holder.itemView.findViewById(R.id.contactEmailOrPhoneReady);
             ImageView imgV = holder.itemView.findViewById(R.id.imgButtonFromItem);
@@ -52,25 +52,11 @@ public final class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             emailOrNumber.post(() -> emailOrNumber.setText(contact.getEmailOrPhone()));
             imgV.post(() -> imgV.setImageResource(contact.getSrc()));
         };
-        Thread thread = new Thread(runnable);
-        thread.start();
-    }
+
 
     @Override
     public int getItemCount() {
-       final int[] contactDaoV = new int[1];
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-        MyDataBase db = SingletonDB.getInstance().getDatabase();
-        ContactDao contactDao = db.contactDao();
-        contactDaoV[0] = contactDao.getId().size();
-            }
-        };
-        Thread thread = new Thread(runnable);
-        thread.start();
-
-        return contactDaoV[0];
+       return contactList != null ? contactList.size() : 0;
     }
 
     public interface OnItemClickListener {
@@ -78,7 +64,12 @@ public final class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public void deleteItem(Contact contact, ContactDao contactDao, int position, int contactsSize) {
-        contactDao.delete(contact);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                contactDao.delete(contact);
+            }
+        });
         notifyItemRemoved(position);
         notifyItemRangeRemoved(position, contactsSize);
     }
