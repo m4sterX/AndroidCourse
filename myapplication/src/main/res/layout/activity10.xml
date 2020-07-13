@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/Android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:text="Android"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/rectangle"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rectangle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Android" />
+
+    <TextView
+        android:id="@+id/PostsCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="120dp"
+        android:text="125"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/rectangle"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/postsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Posts"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/rectangle"
+        app:layout_constraintTop_toBottomOf="@id/PostsCount" />
+
+    <TextView
+        android:id="@+id/FollowersCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="120dp"
+        android:text="20K"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/PostsCount"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Followers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:text="Followers"
+        android:textColor="@color/black"
+
+        app:layout_constraintStart_toEndOf="@id/postsText"
+        app:layout_constraintTop_toBottomOf="@id/FollowersCount" />
+
+    <TextView
+        android:id="@+id/FollowingCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="120dp"
+        android:text="22"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/FollowersCount"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/following"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:text="Following"
+        android:textColor="@color/black"
+
+        app:layout_constraintStart_toEndOf="@+id/Followers"
+        app:layout_constraintTop_toBottomOf="@id/FollowingCount" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:text="Username"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rectangle" />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:text="Address"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/username" />
+
+    <TextView
+        android:id="@+id/Description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30sp"
+        android:layout_marginTop="2dp"
+        android:text="Description"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/address" />
+
+    <TextView
+        android:id="@+id/rect1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/rectangle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Description" />
+
+    <TextView
+        android:id="@+id/rect2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/rectangle"
+        app:layout_constraintStart_toEndOf="@+id/rect1"
+        app:layout_constraintTop_toBottomOf="@id/Description" />
+
+    <TextView
+        android:id="@+id/rect3"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="195dp"
+        android:background="@drawable/rectangle"
+        app:layout_constraintStart_toEndOf="@+id/rect2"
+        app:layout_constraintTop_toBottomOf="@+id/postsText" />
+
+    <TextView
+        android:id="@+id/rect4"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="195dp"
+        android:background="@drawable/rectangle"
+        app:layout_constraintStart_toEndOf="@+id/rect3"
+        app:layout_constraintTop_toBottomOf="@id/Followers" />
+
+    <TextView
+        android:id="@+id/rect5"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="195dp"
+        android:background="@drawable/rectangle"
+        app:layout_constraintStart_toEndOf="@+id/rect4"
+        app:layout_constraintTop_toBottomOf="@+id/Followers" />
+
+    <TextView
+        android:id="@+id/rect6"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="195dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/rectangle"
+        app:layout_constraintStart_toEndOf="@+id/rect5"
+        app:layout_constraintTop_toBottomOf="@id/following" />
+
+    <TextView
+        android:id="@+id/DIRECTIONS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:drawableTop="@drawable/ic_directions_black_24dp"
+        android:text="DIRECTIONS"
+        android:textColor="@color/blue"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rect1" />
+
+    <TextView
+        android:id="@+id/CALL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:drawableTop="@drawable/ic_call_black_30dp"
+        android:text="CALL"
+        android:textColor="@color/blue"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/DIRECTIONS"
+        app:layout_constraintTop_toBottomOf="@+id/rect3" />
+
+    <TextView
+        android:id="@+id/SAVE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:drawableTop="@drawable/ic_star_black_24dp"
+        android:text="SAVE"
+        android:textColor="@color/blue"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/CALL"
+        app:layout_constraintTop_toBottomOf="@+id/rect4" />
+
+    <TextView
+        android:id="@+id/WEBSITE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:drawableTop="@drawable/ic_attachment_black_24dp"
+        android:text="WEBSITE"
+        android:textColor="@color/blue"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/SAVE"
+        app:layout_constraintTop_toBottomOf="@+id/rect6" />
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SAVE"
+        android:layout_marginTop="10dp"
+        />
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:id="@+id/rect11"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:src="@drawable/rectangle"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line1"/>
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:id="@+id/rect22"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/rectangle"
+        app:layout_constraintStart_toEndOf="@id/rect11"
+        app:layout_constraintTop_toBottomOf="@id/line1"/>
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:id="@+id/rect33"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:src="@drawable/rectangle"
+        app:layout_constraintStart_toEndOf="@+id/rect22"
+        app:layout_constraintTop_toBottomOf="@id/line1"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
